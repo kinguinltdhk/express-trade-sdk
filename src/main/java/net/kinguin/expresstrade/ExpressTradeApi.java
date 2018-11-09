@@ -4,6 +4,9 @@ import java.io.IOException;
 import net.kinguin.expresstrade.item.getitems.GetItems;
 import net.kinguin.expresstrade.item.getitems.v1.GetItemsV1;
 import net.kinguin.expresstrade.item.getitems.v1.http.dto.GetItemsDto;
+import net.kinguin.expresstrade.trade.getoffer.GetOffer;
+import net.kinguin.expresstrade.trade.getoffer.v1.GetOfferV1;
+import net.kinguin.expresstrade.trade.getoffer.v1.dto.GetOfferDto;
 import net.kinguin.expresstrade.trade.getoffers.GetOffers;
 import net.kinguin.expresstrade.trade.getoffers.v1.GetOffersV1;
 import net.kinguin.expresstrade.trade.getoffers.v1.dto.GetOffersDto;
@@ -27,6 +30,8 @@ public class ExpressTradeApi {
 
   private GetOffers getOffers;
 
+  private GetOffer getOffer;
+
   private SendOffer sendOffer;
 
   public ExpressTradeApi(ExpressTradeProperties expressTradeProperties) {
@@ -34,6 +39,7 @@ public class ExpressTradeApi {
     this.getItems = new GetItemsV1(expressTradeProperties);
     this.getTradeURL = new GetTradeURLV1(expressTradeProperties);
     this.getOffers = new GetOffersV1(expressTradeProperties);
+    this.getOffer = new GetOfferV1(expressTradeProperties);
     this.sendOffer = new SendOfferV1(expressTradeProperties);
   }
 
@@ -52,6 +58,10 @@ public class ExpressTradeApi {
 
   public GetOffersDto getOffers() throws IOException {
     return getOffers.execute();
+  }
+
+  public GetOfferDto getOffer(Integer offerId) throws IOException {
+    return getOffer.execute(offerId);
   }
 
   public SendOfferDto sendOffer(
