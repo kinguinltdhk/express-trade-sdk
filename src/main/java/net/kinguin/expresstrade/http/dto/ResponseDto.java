@@ -9,4 +9,5 @@ public abstract class ResponseDto {
   private Integer time;
   private Integer current_page;
   private Integer total_pages;
+  private String message;
 }

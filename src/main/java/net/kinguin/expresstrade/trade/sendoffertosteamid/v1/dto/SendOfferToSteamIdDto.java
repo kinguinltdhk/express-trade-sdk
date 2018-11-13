@@ -1,4 +1,4 @@
-package net.kinguin.expresstrade.trade.sendoffer.v1.dto;
+package net.kinguin.expresstrade.trade.sendoffertosteamid.v1.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,12 +7,12 @@ import net.kinguin.expresstrade.trade.StandardTradeObject;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SendOfferDto extends ResponseDto {
+public class SendOfferToSteamIdDto extends ResponseDto {
 
-  private SendOfferResponseDto response;
+  private SendOfferToSteamIdResponseDto response;
 
   @Data
-  public static class SendOfferResponseDto {
+  public static class SendOfferToSteamIdResponseDto {
 
     private StandardTradeObject offer;
   }

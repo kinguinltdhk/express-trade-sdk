@@ -9,9 +9,9 @@ public interface SendOffer {
       Integer uid,
       String token,
       String tradeUrl,
-      String items_to_send,
-      String items_to_receive,
-      Integer expiration_time,
+      String itemsToSend,
+      String itemsToReceive,
+      Integer expirationTime,
       String message
   ) throws IOException;
 }
