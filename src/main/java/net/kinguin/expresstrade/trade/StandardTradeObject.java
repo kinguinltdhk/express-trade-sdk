@@ -7,7 +7,7 @@ import net.kinguin.expresstrade.item.StandardItemObject;
 @Data
 public class StandardTradeObject {
 
-  private String id;
+  private Integer id;
   private TradeUser sender;
   private TradeUser recipient;
   private Integer state;

@@ -3,9 +3,10 @@ package net.kinguin.expresstrade.examples.trade;
 import java.io.IOException;
 import net.kinguin.expresstrade.ExpressTradeApi;
 import net.kinguin.expresstrade.ExpressTradeProperties;
-import net.kinguin.expresstrade.trade.sendoffer.v1.dto.SendOfferDto;
+import net.kinguin.expresstrade.trade.canceloffer.v1.dto.CancelOfferDto;
+import net.kinguin.expresstrade.trade.getoffer.v1.dto.GetOfferDto;
 
-public class SendOfferExample {
+public class CancelOfferExample {
 
   public static void main(String[] args) throws IOException {
     ExpressTradeProperties expressTradeProperties =
@@ -17,16 +18,7 @@ public class SendOfferExample {
         );
     ExpressTradeApi expressTradeApi = new ExpressTradeApi(expressTradeProperties);
 
-    SendOfferDto sendOfferDto =
-        expressTradeApi.sendOffer(
-            4321,
-            "token",
-            "tradeUrl",
-            "1234,4567",
-            "1234,4567",
-            3600,
-            "message");
-
-    System.out.println(sendOfferDto);
+    CancelOfferDto cancelOfferDto = expressTradeApi.cancelOffer(1234);
+    System.out.println(cancelOfferDto);
   }
 }

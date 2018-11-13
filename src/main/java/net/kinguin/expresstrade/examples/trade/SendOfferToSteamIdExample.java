@@ -3,9 +3,9 @@ package net.kinguin.expresstrade.examples.trade;
 import java.io.IOException;
 import net.kinguin.expresstrade.ExpressTradeApi;
 import net.kinguin.expresstrade.ExpressTradeProperties;
-import net.kinguin.expresstrade.trade.sendoffer.v1.dto.SendOfferDto;
+import net.kinguin.expresstrade.trade.sendoffertosteamid.v1.dto.SendOfferToSteamIdDto;
 
-public class SendOfferExample {
+public class SendOfferToSteamIdExample {
 
   public static void main(String[] args) throws IOException {
     ExpressTradeProperties expressTradeProperties =
@@ -17,9 +17,9 @@ public class SendOfferExample {
         );
     ExpressTradeApi expressTradeApi = new ExpressTradeApi(expressTradeProperties);
 
-    SendOfferDto sendOfferDto =
-        expressTradeApi.sendOffer(
-            4321,
+    SendOfferToSteamIdDto sendOfferToSteamIdDto =
+        expressTradeApi.sendOfferToSteamId(
+            "4321",
             "token",
             "tradeUrl",
             "1234,4567",
@@ -27,6 +27,6 @@ public class SendOfferExample {
             3600,
             "message");
 
-    System.out.println(sendOfferDto);
+    System.out.println(sendOfferToSteamIdDto);
   }
 }

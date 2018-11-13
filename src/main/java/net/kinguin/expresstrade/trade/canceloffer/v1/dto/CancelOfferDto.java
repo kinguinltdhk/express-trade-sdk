@@ -1,4 +1,4 @@
-package net.kinguin.expresstrade.trade.sendoffer.v1.dto;
+package net.kinguin.expresstrade.trade.canceloffer.v1.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,12 +7,12 @@ import net.kinguin.expresstrade.trade.StandardTradeObject;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SendOfferDto extends ResponseDto {
+public class CancelOfferDto extends ResponseDto {
 
-  private SendOfferResponseDto response;
+  private CancelOfferResponseDto response;
 
   @Data
-  public static class SendOfferResponseDto {
+  public static class CancelOfferResponseDto {
 
     private StandardTradeObject offer;
   }
