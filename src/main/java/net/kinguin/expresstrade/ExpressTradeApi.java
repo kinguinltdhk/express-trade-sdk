@@ -101,6 +101,10 @@ public class ExpressTradeApi {
     return getOffers.execute();
   }
 
+  public GetOffersDto getOffers(String offerIds) throws IOException {
+    return getOffers.execute(offerIds);
+  }
+
   public GetOfferDto getOffer(Integer offerId) throws IOException {
     return getOffer.execute(offerId);
   }
