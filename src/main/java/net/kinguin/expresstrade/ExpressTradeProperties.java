@@ -2,15 +2,15 @@ package net.kinguin.expresstrade;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class ExpressTradeProperties {
 
-  private Integer uid;
-  private String apiAuthKey;
-  private String apiBaseUrl;
-  private String secret;
+  private final Integer uid;
+  private final String apiAuthKey;
+  private final String secret;
+  private String apiBaseUrl = "https://api-trade.opskins.com";
 }

@@ -12,7 +12,6 @@ public class GetItemsExample {
         new ExpressTradeProperties(
             1234,
             "apiKey",
-            "https://api-trade.opskins.com",
             "secret"
         );
 
