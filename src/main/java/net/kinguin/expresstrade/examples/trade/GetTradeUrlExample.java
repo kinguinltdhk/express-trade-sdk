@@ -12,7 +12,6 @@ public class GetTradeUrlExample {
         new ExpressTradeProperties(
             1234,
             "apiKey",
-            "https://api-trade.opskins.com",
             "secret"
         );
     ExpressTradeApi expressTradeApi = new ExpressTradeApi(expressTradeProperties);
