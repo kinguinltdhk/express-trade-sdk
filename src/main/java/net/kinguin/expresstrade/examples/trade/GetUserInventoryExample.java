@@ -3,6 +3,7 @@ package net.kinguin.expresstrade.examples.trade;
 import java.io.IOException;
 import net.kinguin.expresstrade.ExpressTradeApi;
 import net.kinguin.expresstrade.ExpressTradeProperties;
+import net.kinguin.expresstrade.item.StandardItemSorts;
 import net.kinguin.expresstrade.trade.getuserinventory.v1.http.dto.GetUserInventoryDto;
 
 public class GetUserInventoryExample {
@@ -16,7 +17,13 @@ public class GetUserInventoryExample {
         );
     ExpressTradeApi expressTradeApi = new ExpressTradeApi(expressTradeProperties);
 
-    GetUserInventoryDto getUserInventoryDto = expressTradeApi.getUserInventory(5631183);
+    GetUserInventoryDto getUserInventoryDto = expressTradeApi.getUserInventory(
+        5631183,
+        1,
+        123,
+        123,
+        "search",
+        StandardItemSorts.ASC_NAME);
     System.out.println(getUserInventoryDto);
   }
 }

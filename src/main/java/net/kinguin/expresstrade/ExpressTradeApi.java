@@ -1,6 +1,7 @@
 package net.kinguin.expresstrade;
 
 import java.io.IOException;
+import net.kinguin.expresstrade.item.StandardItemSorts;
 import net.kinguin.expresstrade.item.getitems.GetItems;
 import net.kinguin.expresstrade.item.getitems.v1.GetItemsV1;
 import net.kinguin.expresstrade.item.getitems.v1.http.dto.GetItemsDto;
@@ -79,9 +80,11 @@ public class ExpressTradeApi {
     this.regenerateTradeUrl = new RegenerateTradeUrlV1(expressTradeProperties);
   }
 
-  public GetUserInventoryDto getUserInventory(Integer userId)
+  public GetUserInventoryDto getUserInventory(
+      Integer userId, Integer appId, Integer page, Integer perPage, String search,
+      StandardItemSorts sort)
       throws IOException {
-    return getUserInventory.execute(userId);
+    return getUserInventory.execute(userId, appId, page, perPage, search, sort);
   }
 
   public GetUserInventoryFromSteamIdDto getUserInventoryFromSteamId(String steamId)
@@ -97,12 +100,9 @@ public class ExpressTradeApi {
     return getTradeURL.execute();
   }
 
-  public GetOffersDto getOffers() throws IOException {
-    return getOffers.execute();
-  }
-
-  public GetOffersDto getOffers(String offerIds) throws IOException {
-    return getOffers.execute(offerIds);
+  public GetOffersDto getOffers(Integer userId, String state, String type, Integer page,
+      Integer perPage, String ids, String sort) throws IOException {
+    return getOffers.execute(userId, state, type, page, perPage, ids, sort);
   }
 
   public GetOfferDto getOffer(Integer offerId) throws IOException {

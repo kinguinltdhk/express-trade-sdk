@@ -1,5 +1,8 @@
 package net.kinguin.expresstrade.trade;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public enum OfferState {
   STATE_ACTIVE(2),
   STATE_ACCEPTED(3),
@@ -12,10 +15,6 @@ public enum OfferState {
   STATE_FAILED_CASE_OPEN(12);
 
   private Integer state;
-
-  OfferState(Integer state) {
-    this.state = state;
-  }
 
   public Integer state() {
     return state;

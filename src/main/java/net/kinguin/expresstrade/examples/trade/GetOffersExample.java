@@ -16,7 +16,15 @@ public class GetOffersExample {
         );
     ExpressTradeApi expressTradeApi = new ExpressTradeApi(expressTradeProperties);
 
-    GetOffersDto getOffersDto = expressTradeApi.getOffers();
+    GetOffersDto getOffersDto = expressTradeApi.getOffers(
+        123,
+        "state",
+        "type",
+        1,
+        1,
+        "1234,4567",
+        "created"
+    );
     System.out.println(getOffersDto);
   }
 }
