@@ -1,10 +1,12 @@
 package net.kinguin.expresstrade.trade;
 
 import java.util.List;
+import lombok.Builder;
 import lombok.Data;
 import net.kinguin.expresstrade.item.StandardItemObject;
 
 @Data
+@Builder
 public class StandardTradeObject {
 
   private Integer id;
@@ -21,6 +23,7 @@ public class StandardTradeObject {
   private Boolean sent_by_you;
 
   @Data
+  @Builder
   public static class TradeUser {
 
     private Integer id;

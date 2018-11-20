@@ -1,5 +1,7 @@
 package net.kinguin.expresstrade.http;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.squareup.moshi.Moshi;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -20,9 +22,11 @@ import org.apache.commons.codec.binary.Base64;
 public abstract class Client {
 
   public final ExpressTradeProperties expressTradeProperties;
-  public static final MediaType JSON
+  private static final MediaType JSON
       = MediaType.parse("application/json; charset=utf-8");
   private OkHttpClient okHttpClient = new OkHttpClient();
+  protected final Moshi moshi = new Moshi.Builder().build();
+  protected ObjectMapper objectMapper = new ObjectMapper();
 
   /**
    * Base method for requests.
@@ -83,8 +87,8 @@ public abstract class Client {
   }
 
   protected String generate2AuthCode() {
-    GoogleAuthenticator gAuth = new GoogleAuthenticator();
-    int code = gAuth.getTotpPassword(expressTradeProperties.getSecret());
+    GoogleAuthenticator googleAuthenticator = new GoogleAuthenticator();
+    int code = googleAuthenticator.getTotpPassword(expressTradeProperties.getSecret());
     return Integer.toString(code);
 
   }

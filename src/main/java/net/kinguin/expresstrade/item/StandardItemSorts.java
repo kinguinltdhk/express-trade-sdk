@@ -1,8 +1,10 @@
 package net.kinguin.expresstrade.item;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public enum StandardItemSorts {
   ASC_NAME(1),
   DESC_NAME(2),

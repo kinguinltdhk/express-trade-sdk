@@ -19,5 +19,6 @@ public class GetUserInventoryDto extends ResponseDto {
     private Integer total;
     private List<StandardItemObject> items;
     private StandardUserPublicProfileObject user_data;
+    private List<Object> sort_parameters;
   }
 }
