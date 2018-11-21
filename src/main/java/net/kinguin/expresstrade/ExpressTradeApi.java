@@ -2,9 +2,15 @@ package net.kinguin.expresstrade;
 
 import java.io.IOException;
 import net.kinguin.expresstrade.item.StandardItemSorts;
+import net.kinguin.expresstrade.item.getallitems.GetAllItems;
+import net.kinguin.expresstrade.item.getallitems.v1.GetAllItemsV1;
+import net.kinguin.expresstrade.item.getallitems.v1.http.dto.GetAllItemsDto;
 import net.kinguin.expresstrade.item.getitems.GetItems;
 import net.kinguin.expresstrade.item.getitems.v1.GetItemsV1;
 import net.kinguin.expresstrade.item.getitems.v1.http.dto.GetItemsDto;
+import net.kinguin.expresstrade.item.getitemsbyid.GetItemsById;
+import net.kinguin.expresstrade.item.getitemsbyid.v1.GetItemsByIdV1;
+import net.kinguin.expresstrade.item.getitemsbyid.v1.http.dto.GetItemsByIdDto;
 import net.kinguin.expresstrade.trade.acceptoffer.AcceptOffer;
 import net.kinguin.expresstrade.trade.acceptoffer.v1.AcceptOfferV1;
 import net.kinguin.expresstrade.trade.acceptoffer.v1.dto.AcceptOfferDto;
@@ -65,6 +71,10 @@ public class ExpressTradeApi {
 
   private RegenerateTradeUrl regenerateTradeUrl;
 
+  private GetAllItems getAllItems;
+
+  private GetItemsById getItemsById;
+
   public ExpressTradeApi(ExpressTradeProperties expressTradeProperties) {
     this.getUserInventory = new GetUserInventoryV1(expressTradeProperties);
     this.getUserInventoryFromSteamId = new GetUserInventoryFromSteamIdV1(expressTradeProperties);
@@ -78,6 +88,8 @@ public class ExpressTradeApi {
     this.cancelOffer = new CancelOfferV1(expressTradeProperties);
     this.getApps = new GetAppsV1(expressTradeProperties);
     this.regenerateTradeUrl = new RegenerateTradeUrlV1(expressTradeProperties);
+    this.getAllItems = new GetAllItemsV1(expressTradeProperties);
+    this.getItemsById = new GetItemsByIdV1(expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -150,5 +162,16 @@ public class ExpressTradeApi {
 
   public RegenerateTradeUrlDto regenerateTradeUrl() throws IOException {
     return regenerateTradeUrl.execute();
+  }
+
+  public GetAllItemsDto getAllItems(
+      Integer appId, String sku, String name, Integer page, Integer perPage,
+      StandardItemSorts sort, Boolean noExclusions
+  ) throws IOException {
+    return getAllItems.execute(appId, sku, name, page, perPage, sort, noExclusions);
+  }
+
+  public GetItemsByIdDto getItemsByIdDto(String itemId) throws IOException {
+    return getItemsById.execute(itemId);
   }
 }
