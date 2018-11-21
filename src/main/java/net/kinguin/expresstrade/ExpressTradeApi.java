@@ -87,9 +87,10 @@ public class ExpressTradeApi {
     return getUserInventory.execute(userId, appId, page, perPage, search, sort);
   }
 
-  public GetUserInventoryFromSteamIdDto getUserInventoryFromSteamId(String steamId)
+  public GetUserInventoryFromSteamIdDto getUserInventoryFromSteamId(String steamId, Integer appId,
+      Integer page, Integer perPage, String search, StandardItemSorts sort)
       throws IOException {
-    return getUserInventoryFromSteamId.execute(steamId);
+    return getUserInventoryFromSteamId.execute(steamId, appId, page, perPage, search, sort);
   }
 
   public GetItemsDto getItems() throws IOException {
