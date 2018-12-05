@@ -17,7 +17,7 @@ public class GetItemsExample {
 
     ExpressTradeApi expressTradeApi = new ExpressTradeApi(expressTradeProperties);
 
-    GetItemsDto items = expressTradeApi.getItems();
+    GetItemsDto items = expressTradeApi.getItems(null, null);
     System.out.println(items);
   }
 }

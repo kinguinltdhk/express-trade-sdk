@@ -26,9 +26,9 @@ import net.kinguin.expresstrade.trade.getoffer.v1.dto.GetOfferDto;
 import net.kinguin.expresstrade.trade.getoffers.GetOffers;
 import net.kinguin.expresstrade.trade.getoffers.v1.GetOffersV1;
 import net.kinguin.expresstrade.trade.getoffers.v1.dto.GetOffersDto;
-import net.kinguin.expresstrade.trade.gettradeurl.GetTradeURL;
-import net.kinguin.expresstrade.trade.gettradeurl.v1.GetTradeURLV1;
-import net.kinguin.expresstrade.trade.gettradeurl.v1.dto.GetTradeURLDto;
+import net.kinguin.expresstrade.trade.gettradeurl.GetTradeUrl;
+import net.kinguin.expresstrade.trade.gettradeurl.v1.GetTradeUrlV1;
+import net.kinguin.expresstrade.trade.gettradeurl.v1.dto.GetTradeUrlDto;
 import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventory;
 import net.kinguin.expresstrade.trade.getuserinventory.v1.GetUserInventoryV1;
 import net.kinguin.expresstrade.trade.getuserinventory.v1.http.dto.GetUserInventoryDto;
@@ -53,7 +53,7 @@ public class ExpressTradeApi {
 
   private GetItems getItems;
 
-  private GetTradeURL getTradeURL;
+  private GetTradeUrl getTradeUrl;
 
   private GetOffers getOffers;
 
@@ -79,7 +79,7 @@ public class ExpressTradeApi {
     this.getUserInventory = new GetUserInventoryV1(expressTradeProperties);
     this.getUserInventoryFromSteamId = new GetUserInventoryFromSteamIdV1(expressTradeProperties);
     this.getItems = new GetItemsV1(expressTradeProperties);
-    this.getTradeURL = new GetTradeURLV1(expressTradeProperties);
+    this.getTradeUrl = new GetTradeUrlV1(expressTradeProperties);
     this.getOffers = new GetOffersV1(expressTradeProperties);
     this.getOffer = new GetOfferV1(expressTradeProperties);
     this.sendOffer = new SendOfferV1(expressTradeProperties);
@@ -105,12 +105,12 @@ public class ExpressTradeApi {
     return getUserInventoryFromSteamId.execute(steamId, appId, page, perPage, search, sort);
   }
 
-  public GetItemsDto getItems() throws IOException {
-    return getItems.execute();
+  public GetItemsDto getItems(String skuFilter, Integer wearTierIndex) throws IOException {
+    return getItems.execute(skuFilter, wearTierIndex);
   }
 
-  public GetTradeURLDto getTradeURL() throws IOException {
-    return getTradeURL.execute();
+  public GetTradeUrlDto getTradeUrl() throws IOException {
+    return getTradeUrl.execute();
   }
 
   public GetOffersDto getOffers(Integer userId, String state, String type, Integer page,
@@ -137,15 +137,13 @@ public class ExpressTradeApi {
 
   public SendOfferToSteamIdDto sendOfferToSteamId(
       String steamId,
-      String token,
-      String tradeUrl,
       String itemsToSend,
       String itemsToReceive,
       Integer expirationTime,
       String message
   ) throws IOException {
     return sendOfferToSteamId
-        .execute(steamId, token, tradeUrl, itemsToSend, itemsToReceive, expirationTime, message);
+        .execute(steamId, itemsToSend, itemsToReceive, expirationTime, message);
   }
 
   public AcceptOfferDto acceptOffer(Integer offerId) throws IOException {

@@ -3,7 +3,7 @@ package net.kinguin.expresstrade.examples.trade;
 import java.io.IOException;
 import net.kinguin.expresstrade.ExpressTradeApi;
 import net.kinguin.expresstrade.ExpressTradeProperties;
-import net.kinguin.expresstrade.trade.gettradeurl.v1.dto.GetTradeURLDto;
+import net.kinguin.expresstrade.trade.gettradeurl.v1.dto.GetTradeUrlDto;
 
 public class GetTradeUrlExample {
 
@@ -16,7 +16,7 @@ public class GetTradeUrlExample {
         );
     ExpressTradeApi expressTradeApi = new ExpressTradeApi(expressTradeProperties);
 
-    GetTradeURLDto getTradeURLDto = expressTradeApi.getTradeURL();
-    System.out.println(getTradeURLDto);
+    GetTradeUrlDto getTradeUrlDto = expressTradeApi.getTradeUrl();
+    System.out.println(getTradeUrlDto);
   }
 }
