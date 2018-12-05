@@ -8,6 +8,7 @@ import net.kinguin.expresstrade.trade.StandardTradeObject;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class GetOfferDto extends ResponseDto {
+
   private GetOfferResponseDto response;
 
   @Data

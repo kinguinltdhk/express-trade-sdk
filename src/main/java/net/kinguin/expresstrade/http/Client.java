@@ -26,7 +26,8 @@ public abstract class Client {
       = MediaType.parse("application/json; charset=utf-8");
   private OkHttpClient okHttpClient = new OkHttpClient();
   protected final Moshi moshi = new Moshi.Builder().build();
-  protected ObjectMapper objectMapper = new ObjectMapper();
+  protected RequestUriBuilder requestUriBuilder;
+  public final String endpointUrl;
 
   /**
    * Base method for requests.
@@ -39,24 +40,33 @@ public abstract class Client {
     Request request = requestBuilder.build();
 
     Response response = okHttpClient.newCall(request).execute();
+    if (!response.isSuccessful()) {
+      response.close();
+      throw new IOException();
+    }
+
     return response.body();
   }
 
   /**
    * Base method for POST requests.
    *
-   * @param jsonBody Strigify json of body
    * @return ResponseBody ResponseBody object
    * @throws IOException exception
    */
-  public ResponseBody makePostRequest(String jsonBody) throws IOException {
-    Builder requestBuilder = getRequestBuilder();
-    RequestBody requestBody = RequestBody.create(JSON, jsonBody);
+  public ResponseBody makePostRequest() throws IOException {
+    Builder requestBuilder = getPostRequestBuilder();
+    RequestBody requestBody = RequestBody.create(JSON, requestUriBuilder.getJsonBody());
     requestBuilder.post(requestBody);
 
     Request request = requestBuilder.build();
 
     Response response = okHttpClient.newCall(request).execute();
+    if (!response.isSuccessful()) {
+      response.close();
+      throw new IOException();
+    }
+
     return response.body();
   }
 
@@ -66,8 +76,20 @@ public abstract class Client {
         .headers(createHttpHeaders());
   }
 
+  private Builder getPostRequestBuilder() throws MalformedURLException {
+    return new Builder()
+        .url(getPostUrl())
+        .headers(createHttpHeaders());
+  }
+
+  private URL getPostUrl() throws MalformedURLException {
+    return new URL(
+        expressTradeProperties.getApiBaseUrl() + endpointUrl);
+  }
+
   private URL getFullUrl() throws MalformedURLException {
-    return new URL(expressTradeProperties.getApiBaseUrl() + this.getEndpointUrl());
+    return new URL(
+        expressTradeProperties.getApiBaseUrl() + requestUriBuilder.getEndpointUrl(endpointUrl));
   }
 
   protected Headers createHttpHeaders() {
@@ -92,6 +114,4 @@ public abstract class Client {
     return Integer.toString(code);
 
   }
-
-  protected abstract String getEndpointUrl();
 }

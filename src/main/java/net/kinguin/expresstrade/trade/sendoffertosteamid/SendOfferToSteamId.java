@@ -7,8 +7,6 @@ public interface SendOfferToSteamId {
 
   SendOfferToSteamIdDto execute(
       String steamId,
-      String token,
-      String tradeUrl,
       String itemsToSend,
       String itemsToReceive,
       Integer expirationTime,

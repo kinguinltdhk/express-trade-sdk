@@ -5,5 +5,5 @@ import net.kinguin.expresstrade.item.getitems.v1.http.dto.GetItemsDto;
 
 public interface GetItems {
 
-  GetItemsDto execute() throws IOException;
+  GetItemsDto execute(String skuFilter, Integer wearTierIndex) throws IOException;
 }

@@ -19,8 +19,6 @@ public class SendOfferToSteamIdExample {
     SendOfferToSteamIdDto sendOfferToSteamIdDto =
         expressTradeApi.sendOfferToSteamId(
             "4321",
-            "token",
-            "tradeUrl",
             "1234,4567",
             "1234,4567",
             3600,

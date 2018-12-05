@@ -6,7 +6,7 @@ import net.kinguin.expresstrade.http.dto.ResponseDto;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class GetTradeURLDto extends ResponseDto {
+public class GetTradeUrlDto extends ResponseDto {
 
   private GetTradeUrlResponseDto response;
 
