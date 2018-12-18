@@ -42,7 +42,7 @@ public abstract class Client {
     Response response = okHttpClient.newCall(request).execute();
     if (!response.isSuccessful()) {
       response.close();
-      throw new IOException();
+      throw new OpskinsApiException(response);
     }
 
     return response.body();
@@ -64,7 +64,7 @@ public abstract class Client {
     Response response = okHttpClient.newCall(request).execute();
     if (!response.isSuccessful()) {
       response.close();
-      throw new IOException();
+      throw new OpskinsApiException(response);
     }
 
     return response.body();
