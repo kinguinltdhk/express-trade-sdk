@@ -2,6 +2,9 @@ package net.kinguin.expresstrade;
 
 import java.io.IOException;
 import net.kinguin.expresstrade.item.StandardItemSorts;
+import net.kinguin.expresstrade.item.getallitemdefinitions.GetAllItemDefinitions;
+import net.kinguin.expresstrade.item.getallitemdefinitions.v1.GetAllItemDefinitionsV1;
+import net.kinguin.expresstrade.item.getallitemdefinitions.v1.http.dto.GetAllItemDefinitionsDto;
 import net.kinguin.expresstrade.item.getallitems.GetAllItems;
 import net.kinguin.expresstrade.item.getallitems.v1.GetAllItemsV1;
 import net.kinguin.expresstrade.item.getallitems.v1.http.dto.GetAllItemsDto;
@@ -75,6 +78,8 @@ public class ExpressTradeApi {
 
   private GetItemsById getItemsById;
 
+  private GetAllItemDefinitions getAllItemDefinitions;
+
   public ExpressTradeApi(ExpressTradeProperties expressTradeProperties) {
     this.getUserInventory = new GetUserInventoryV1(expressTradeProperties);
     this.getUserInventoryFromSteamId = new GetUserInventoryFromSteamIdV1(expressTradeProperties);
@@ -90,6 +95,7 @@ public class ExpressTradeApi {
     this.regenerateTradeUrl = new RegenerateTradeUrlV1(expressTradeProperties);
     this.getAllItems = new GetAllItemsV1(expressTradeProperties);
     this.getItemsById = new GetItemsByIdV1(expressTradeProperties);
+    this.getAllItemDefinitions = new GetAllItemDefinitionsV1(expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -171,5 +177,10 @@ public class ExpressTradeApi {
 
   public GetItemsByIdDto getItemsByIdDto(String itemId) throws IOException {
     return getItemsById.execute(itemId);
+  }
+
+  public GetAllItemDefinitionsDto getAllItemDefinitionsDto(Integer appId, String defIdFilter,
+      String indexBy, Integer page, Integer perPage) throws IOException {
+    return getAllItemDefinitions.execute(appId, defIdFilter, indexBy, page, perPage);
   }
 }
