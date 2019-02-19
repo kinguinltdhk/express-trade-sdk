@@ -111,7 +111,6 @@ public abstract class Client {
   protected String generate2AuthCode() {
     GoogleAuthenticator googleAuthenticator = new GoogleAuthenticator();
     int code = googleAuthenticator.getTotpPassword(expressTradeProperties.getSecret());
-    return Integer.toString(code);
-
+    return String.format("%06d", code);
   }
 }
