@@ -1,12 +1,11 @@
 package net.kinguin.expresstrade.http;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.moshi.Moshi;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import lombok.RequiredArgsConstructor;
+import java.util.concurrent.TimeUnit;
 import net.kinguin.expresstrade.ExpressTradeProperties;
 import okhttp3.Headers;
 import okhttp3.MediaType;
@@ -18,16 +17,24 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.apache.commons.codec.binary.Base64;
 
-@RequiredArgsConstructor
 public abstract class Client {
 
   public final ExpressTradeProperties expressTradeProperties;
+  private OkHttpClient okHttpClient;
+  protected RequestUriBuilder requestUriBuilder;
+  private final String endpointUrl;
+
   private static final MediaType JSON
       = MediaType.parse("application/json; charset=utf-8");
-  private OkHttpClient okHttpClient = new OkHttpClient();
   protected final Moshi moshi = new Moshi.Builder().build();
-  protected RequestUriBuilder requestUriBuilder;
-  public final String endpointUrl;
+
+  public Client(ExpressTradeProperties expressTradeProperties,
+      String endpointUrl) {
+    this.expressTradeProperties = expressTradeProperties;
+    this.endpointUrl = endpointUrl;
+
+    this.okHttpClient = setupOkHttpClient().build();
+  }
 
   /**
    * Base method for requests.
@@ -80,6 +87,15 @@ public abstract class Client {
     return new Builder()
         .url(getPostUrl())
         .headers(createHttpHeaders());
+  }
+
+  private OkHttpClient.Builder setupOkHttpClient() {
+    OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+
+    clientBuilder.readTimeout(10, TimeUnit.SECONDS);
+    clientBuilder.writeTimeout(10, TimeUnit.SECONDS);
+
+    return clientBuilder;
   }
 
   private URL getPostUrl() throws MalformedURLException {
