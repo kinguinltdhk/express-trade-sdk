@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+import lombok.RequiredArgsConstructor;
 import net.kinguin.expresstrade.ExpressTradeProperties;
 import okhttp3.Headers;
 import okhttp3.MediaType;
@@ -17,24 +18,17 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.apache.commons.codec.binary.Base64;
 
+@RequiredArgsConstructor
 public abstract class Client {
 
   public final ExpressTradeProperties expressTradeProperties;
-  private OkHttpClient okHttpClient;
+  private OkHttpClient okHttpClient = setupOkHttpClient().build();
   protected RequestUriBuilder requestUriBuilder;
   private final String endpointUrl;
 
   private static final MediaType JSON
       = MediaType.parse("application/json; charset=utf-8");
   protected final Moshi moshi = new Moshi.Builder().build();
-
-  public Client(ExpressTradeProperties expressTradeProperties,
-      String endpointUrl) {
-    this.expressTradeProperties = expressTradeProperties;
-    this.endpointUrl = endpointUrl;
-
-    this.okHttpClient = setupOkHttpClient().build();
-  }
 
   /**
    * Base method for requests.
@@ -89,7 +83,7 @@ public abstract class Client {
         .headers(createHttpHeaders());
   }
 
-  private OkHttpClient.Builder setupOkHttpClient() {
+  private static OkHttpClient.Builder setupOkHttpClient() {
     OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
 
     clientBuilder.readTimeout(10, TimeUnit.SECONDS);
