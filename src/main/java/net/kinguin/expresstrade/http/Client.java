@@ -22,7 +22,7 @@ import org.apache.commons.codec.binary.Base64;
 public abstract class Client {
 
   public final ExpressTradeProperties expressTradeProperties;
-  private OkHttpClient okHttpClient = setupOkHttpClient().build();
+  private OkHttpClient okHttpClient = setupOkHttpClient();
   protected RequestUriBuilder requestUriBuilder;
   private final String endpointUrl;
 
@@ -83,13 +83,13 @@ public abstract class Client {
         .headers(createHttpHeaders());
   }
 
-  private static OkHttpClient.Builder setupOkHttpClient() {
+  private static OkHttpClient setupOkHttpClient() {
     OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
 
     clientBuilder.readTimeout(10, TimeUnit.SECONDS);
     clientBuilder.writeTimeout(10, TimeUnit.SECONDS);
 
-    return clientBuilder;
+    return clientBuilder.build();
   }
 
   private URL getPostUrl() throws MalformedURLException {
