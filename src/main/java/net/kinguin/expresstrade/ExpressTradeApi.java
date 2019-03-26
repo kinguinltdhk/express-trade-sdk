@@ -33,8 +33,10 @@ import net.kinguin.expresstrade.trade.gettradeurl.GetTradeUrl;
 import net.kinguin.expresstrade.trade.gettradeurl.v1.GetTradeUrlV1;
 import net.kinguin.expresstrade.trade.gettradeurl.v1.dto.GetTradeUrlDto;
 import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventory;
+import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventoryV2;
 import net.kinguin.expresstrade.trade.getuserinventory.v1.GetUserInventoryV1;
 import net.kinguin.expresstrade.trade.getuserinventory.v1.http.dto.GetUserInventoryDto;
+import net.kinguin.expresstrade.trade.getuserinventory.v2.dto.GetUserInventoryV2Dto;
 import net.kinguin.expresstrade.trade.getuserinventoryfromsteamid.GetUserInventoryFromSteamId;
 import net.kinguin.expresstrade.trade.getuserinventoryfromsteamid.v1.GetUserInventoryFromSteamIdV1;
 import net.kinguin.expresstrade.trade.getuserinventoryfromsteamid.v1.http.dto.GetUserInventoryFromSteamIdDto;
@@ -51,6 +53,8 @@ import net.kinguin.expresstrade.trade.sendoffertosteamid.v1.dto.SendOfferToSteam
 public class ExpressTradeApi {
 
   private GetUserInventory getUserInventory;
+
+  private GetUserInventoryV2 getUserInventoryV2;
 
   private GetUserInventoryFromSteamId getUserInventoryFromSteamId;
 
@@ -96,6 +100,8 @@ public class ExpressTradeApi {
     this.getAllItems = new GetAllItemsV1(expressTradeProperties);
     this.getItemsById = new GetItemsByIdV1(expressTradeProperties);
     this.getAllItemDefinitions = new GetAllItemDefinitionsV1(expressTradeProperties);
+    this.getUserInventoryV2 = new net.kinguin.expresstrade.trade.getuserinventory.v2.GetUserInventoryV2(
+        expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -182,5 +188,12 @@ public class ExpressTradeApi {
   public GetAllItemDefinitionsDto getAllItemDefinitionsDto(Integer appId, String defIdFilter,
       String indexBy, Integer page, Integer perPage) throws IOException {
     return getAllItemDefinitions.execute(appId, defIdFilter, indexBy, page, perPage);
+  }
+
+  public GetUserInventoryV2Dto getUserInventoryV2(Integer userId, Integer appId, Integer page,
+      Integer perPage, String search,
+      StandardItemSorts sort)
+      throws IOException {
+    return getUserInventoryV2.execute(userId, appId, page, perPage, search, sort);
   }
 }
