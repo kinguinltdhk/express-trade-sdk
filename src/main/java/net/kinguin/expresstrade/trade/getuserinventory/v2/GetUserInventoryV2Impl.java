@@ -9,16 +9,16 @@ import net.kinguin.expresstrade.http.Client;
 import net.kinguin.expresstrade.http.RequestUriBuilder;
 import net.kinguin.expresstrade.item.StandardItemSorts;
 import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventory;
+import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventoryV2;
 import net.kinguin.expresstrade.trade.getuserinventory.v2.dto.GetUserInventoryV2Dto;
 
-public class GetUserInventoryV2 extends Client implements
-    net.kinguin.expresstrade.trade.getuserinventory.GetUserInventoryV2 {
+public class GetUserInventoryV2Impl extends Client implements GetUserInventoryV2 {
 
   private static final String ENDPOINT_URL = "/ITrade/GetUserInventory/v2/";
   private final JsonAdapter<GetUserInventoryV2Dto> inventoryJsonAdapter =
       moshi.adapter(GetUserInventoryV2Dto.class);
 
-  public GetUserInventoryV2(ExpressTradeProperties expressTradeProperties) {
+  public GetUserInventoryV2Impl(ExpressTradeProperties expressTradeProperties) {
     super(expressTradeProperties, ENDPOINT_URL);
   }
 

@@ -24,11 +24,17 @@ import net.kinguin.expresstrade.trade.getapps.GetApps;
 import net.kinguin.expresstrade.trade.getapps.v1.GetAppsV1;
 import net.kinguin.expresstrade.trade.getapps.v1.dto.GetAppsDto;
 import net.kinguin.expresstrade.trade.getoffer.GetOffer;
+import net.kinguin.expresstrade.trade.getoffer.GetOfferV2;
 import net.kinguin.expresstrade.trade.getoffer.v1.GetOfferV1;
 import net.kinguin.expresstrade.trade.getoffer.v1.dto.GetOfferDto;
+import net.kinguin.expresstrade.trade.getoffer.v2.GetOfferV2Impl;
+import net.kinguin.expresstrade.trade.getoffer.v2.dto.GetOfferV2Dto;
 import net.kinguin.expresstrade.trade.getoffers.GetOffers;
+import net.kinguin.expresstrade.trade.getoffers.GetOffersV2;
 import net.kinguin.expresstrade.trade.getoffers.v1.GetOffersV1;
 import net.kinguin.expresstrade.trade.getoffers.v1.dto.GetOffersDto;
+import net.kinguin.expresstrade.trade.getoffers.v2.GetOffersV2Impl;
+import net.kinguin.expresstrade.trade.getoffers.v2.dto.GetOffersV2Dto;
 import net.kinguin.expresstrade.trade.gettradeurl.GetTradeUrl;
 import net.kinguin.expresstrade.trade.gettradeurl.v1.GetTradeUrlV1;
 import net.kinguin.expresstrade.trade.gettradeurl.v1.dto.GetTradeUrlDto;
@@ -36,6 +42,7 @@ import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventory;
 import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventoryV2;
 import net.kinguin.expresstrade.trade.getuserinventory.v1.GetUserInventoryV1;
 import net.kinguin.expresstrade.trade.getuserinventory.v1.http.dto.GetUserInventoryDto;
+import net.kinguin.expresstrade.trade.getuserinventory.v2.GetUserInventoryV2Impl;
 import net.kinguin.expresstrade.trade.getuserinventory.v2.dto.GetUserInventoryV2Dto;
 import net.kinguin.expresstrade.trade.getuserinventoryfromsteamid.GetUserInventoryFromSteamId;
 import net.kinguin.expresstrade.trade.getuserinventoryfromsteamid.v1.GetUserInventoryFromSteamIdV1;
@@ -64,7 +71,11 @@ public class ExpressTradeApi {
 
   private GetOffers getOffers;
 
+  private GetOffersV2 getOffersV2;
+
   private GetOffer getOffer;
+
+  private GetOfferV2 getOfferV2;
 
   private SendOffer sendOffer;
 
@@ -100,8 +111,9 @@ public class ExpressTradeApi {
     this.getAllItems = new GetAllItemsV1(expressTradeProperties);
     this.getItemsById = new GetItemsByIdV1(expressTradeProperties);
     this.getAllItemDefinitions = new GetAllItemDefinitionsV1(expressTradeProperties);
-    this.getUserInventoryV2 = new net.kinguin.expresstrade.trade.getuserinventory.v2.GetUserInventoryV2(
-        expressTradeProperties);
+    this.getUserInventoryV2 = new GetUserInventoryV2Impl(expressTradeProperties);
+    this.getOffersV2 = new GetOffersV2Impl(expressTradeProperties);
+    this.getOfferV2 = new GetOfferV2Impl(expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -195,5 +207,14 @@ public class ExpressTradeApi {
       StandardItemSorts sort)
       throws IOException {
     return getUserInventoryV2.execute(userId, appId, page, perPage, search, sort);
+  }
+
+  public GetOffersV2Dto getOffersV2(Integer userId, String state, String type, Integer page,
+      Integer perPage, String ids, String sort) throws IOException {
+    return getOffersV2.execute(userId, state, type, page, perPage, ids, sort);
+  }
+
+  public GetOfferV2Dto getOfferV2(Integer offerId) throws IOException {
+    return getOfferV2.execute(offerId);
   }
 }
