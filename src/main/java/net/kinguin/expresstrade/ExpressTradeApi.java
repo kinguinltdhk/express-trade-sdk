@@ -15,8 +15,11 @@ import net.kinguin.expresstrade.item.getitemsbyid.GetItemsById;
 import net.kinguin.expresstrade.item.getitemsbyid.v1.GetItemsByIdV1;
 import net.kinguin.expresstrade.item.getitemsbyid.v1.http.dto.GetItemsByIdDto;
 import net.kinguin.expresstrade.trade.acceptoffer.AcceptOffer;
+import net.kinguin.expresstrade.trade.acceptoffer.AcceptOfferV2;
 import net.kinguin.expresstrade.trade.acceptoffer.v1.AcceptOfferV1;
 import net.kinguin.expresstrade.trade.acceptoffer.v1.dto.AcceptOfferDto;
+import net.kinguin.expresstrade.trade.acceptoffer.v2.AcceptOfferV2Impl;
+import net.kinguin.expresstrade.trade.acceptoffer.v2.dto.AcceptOfferV2Dto;
 import net.kinguin.expresstrade.trade.canceloffer.CancelOffer;
 import net.kinguin.expresstrade.trade.canceloffer.v1.CancelOfferV1;
 import net.kinguin.expresstrade.trade.canceloffer.v1.dto.CancelOfferDto;
@@ -83,6 +86,8 @@ public class ExpressTradeApi {
 
   private AcceptOffer acceptOffer;
 
+  private AcceptOfferV2 acceptOfferV2;
+
   private CancelOffer cancelOffer;
 
   private GetApps getApps;
@@ -114,6 +119,7 @@ public class ExpressTradeApi {
     this.getUserInventoryV2 = new GetUserInventoryV2Impl(expressTradeProperties);
     this.getOffersV2 = new GetOffersV2Impl(expressTradeProperties);
     this.getOfferV2 = new GetOfferV2Impl(expressTradeProperties);
+    this.acceptOfferV2 = new AcceptOfferV2Impl(expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -216,5 +222,9 @@ public class ExpressTradeApi {
 
   public GetOfferV2Dto getOfferV2(Integer offerId) throws IOException {
     return getOfferV2.execute(offerId);
+  }
+
+  public AcceptOfferV2Dto acceptOfferV2(Integer offerId) throws IOException {
+    return acceptOfferV2.execute(offerId);
   }
 }
