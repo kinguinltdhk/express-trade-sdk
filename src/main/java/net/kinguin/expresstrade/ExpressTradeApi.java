@@ -15,8 +15,11 @@ import net.kinguin.expresstrade.item.getitemsbyid.GetItemsById;
 import net.kinguin.expresstrade.item.getitemsbyid.v1.GetItemsByIdV1;
 import net.kinguin.expresstrade.item.getitemsbyid.v1.http.dto.GetItemsByIdDto;
 import net.kinguin.expresstrade.trade.acceptoffer.AcceptOffer;
+import net.kinguin.expresstrade.trade.acceptoffer.AcceptOfferV2;
 import net.kinguin.expresstrade.trade.acceptoffer.v1.AcceptOfferV1;
 import net.kinguin.expresstrade.trade.acceptoffer.v1.dto.AcceptOfferDto;
+import net.kinguin.expresstrade.trade.acceptoffer.v2.AcceptOfferV2Impl;
+import net.kinguin.expresstrade.trade.acceptoffer.v2.dto.AcceptOfferV2Dto;
 import net.kinguin.expresstrade.trade.canceloffer.CancelOffer;
 import net.kinguin.expresstrade.trade.canceloffer.v1.CancelOfferV1;
 import net.kinguin.expresstrade.trade.canceloffer.v1.dto.CancelOfferDto;
@@ -24,17 +27,26 @@ import net.kinguin.expresstrade.trade.getapps.GetApps;
 import net.kinguin.expresstrade.trade.getapps.v1.GetAppsV1;
 import net.kinguin.expresstrade.trade.getapps.v1.dto.GetAppsDto;
 import net.kinguin.expresstrade.trade.getoffer.GetOffer;
+import net.kinguin.expresstrade.trade.getoffer.GetOfferV2;
 import net.kinguin.expresstrade.trade.getoffer.v1.GetOfferV1;
 import net.kinguin.expresstrade.trade.getoffer.v1.dto.GetOfferDto;
+import net.kinguin.expresstrade.trade.getoffer.v2.GetOfferV2Impl;
+import net.kinguin.expresstrade.trade.getoffer.v2.dto.GetOfferV2Dto;
 import net.kinguin.expresstrade.trade.getoffers.GetOffers;
+import net.kinguin.expresstrade.trade.getoffers.GetOffersV2;
 import net.kinguin.expresstrade.trade.getoffers.v1.GetOffersV1;
 import net.kinguin.expresstrade.trade.getoffers.v1.dto.GetOffersDto;
+import net.kinguin.expresstrade.trade.getoffers.v2.GetOffersV2Impl;
+import net.kinguin.expresstrade.trade.getoffers.v2.dto.GetOffersV2Dto;
 import net.kinguin.expresstrade.trade.gettradeurl.GetTradeUrl;
 import net.kinguin.expresstrade.trade.gettradeurl.v1.GetTradeUrlV1;
 import net.kinguin.expresstrade.trade.gettradeurl.v1.dto.GetTradeUrlDto;
 import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventory;
+import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventoryV2;
 import net.kinguin.expresstrade.trade.getuserinventory.v1.GetUserInventoryV1;
 import net.kinguin.expresstrade.trade.getuserinventory.v1.http.dto.GetUserInventoryDto;
+import net.kinguin.expresstrade.trade.getuserinventory.v2.GetUserInventoryV2Impl;
+import net.kinguin.expresstrade.trade.getuserinventory.v2.dto.GetUserInventoryV2Dto;
 import net.kinguin.expresstrade.trade.getuserinventoryfromsteamid.GetUserInventoryFromSteamId;
 import net.kinguin.expresstrade.trade.getuserinventoryfromsteamid.v1.GetUserInventoryFromSteamIdV1;
 import net.kinguin.expresstrade.trade.getuserinventoryfromsteamid.v1.http.dto.GetUserInventoryFromSteamIdDto;
@@ -52,6 +64,8 @@ public class ExpressTradeApi {
 
   private GetUserInventory getUserInventory;
 
+  private GetUserInventoryV2 getUserInventoryV2;
+
   private GetUserInventoryFromSteamId getUserInventoryFromSteamId;
 
   private GetItems getItems;
@@ -60,13 +74,19 @@ public class ExpressTradeApi {
 
   private GetOffers getOffers;
 
+  private GetOffersV2 getOffersV2;
+
   private GetOffer getOffer;
+
+  private GetOfferV2 getOfferV2;
 
   private SendOffer sendOffer;
 
   private SendOfferToSteamId sendOfferToSteamId;
 
   private AcceptOffer acceptOffer;
+
+  private AcceptOfferV2 acceptOfferV2;
 
   private CancelOffer cancelOffer;
 
@@ -96,6 +116,10 @@ public class ExpressTradeApi {
     this.getAllItems = new GetAllItemsV1(expressTradeProperties);
     this.getItemsById = new GetItemsByIdV1(expressTradeProperties);
     this.getAllItemDefinitions = new GetAllItemDefinitionsV1(expressTradeProperties);
+    this.getUserInventoryV2 = new GetUserInventoryV2Impl(expressTradeProperties);
+    this.getOffersV2 = new GetOffersV2Impl(expressTradeProperties);
+    this.getOfferV2 = new GetOfferV2Impl(expressTradeProperties);
+    this.acceptOfferV2 = new AcceptOfferV2Impl(expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -182,5 +206,25 @@ public class ExpressTradeApi {
   public GetAllItemDefinitionsDto getAllItemDefinitionsDto(Integer appId, String defIdFilter,
       String indexBy, Integer page, Integer perPage) throws IOException {
     return getAllItemDefinitions.execute(appId, defIdFilter, indexBy, page, perPage);
+  }
+
+  public GetUserInventoryV2Dto getUserInventoryV2(Integer userId, Integer appId, Integer page,
+      Integer perPage, String search,
+      StandardItemSorts sort)
+      throws IOException {
+    return getUserInventoryV2.execute(userId, appId, page, perPage, search, sort);
+  }
+
+  public GetOffersV2Dto getOffersV2(Integer userId, String state, String type, Integer page,
+      Integer perPage, String ids, String sort) throws IOException {
+    return getOffersV2.execute(userId, state, type, page, perPage, ids, sort);
+  }
+
+  public GetOfferV2Dto getOfferV2(Integer offerId) throws IOException {
+    return getOfferV2.execute(offerId);
+  }
+
+  public AcceptOfferV2Dto acceptOfferV2(Integer offerId) throws IOException {
+    return acceptOfferV2.execute(offerId);
   }
 }
