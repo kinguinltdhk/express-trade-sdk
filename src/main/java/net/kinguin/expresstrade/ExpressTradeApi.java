@@ -54,8 +54,11 @@ import net.kinguin.expresstrade.trade.regeneratetradeurl.RegenerateTradeUrl;
 import net.kinguin.expresstrade.trade.regeneratetradeurl.v1.RegenerateTradeUrlV1;
 import net.kinguin.expresstrade.trade.regeneratetradeurl.v1.dto.RegenerateTradeUrlDto;
 import net.kinguin.expresstrade.trade.sendoffer.SendOffer;
+import net.kinguin.expresstrade.trade.sendoffer.SendOfferV2;
 import net.kinguin.expresstrade.trade.sendoffer.v1.SendOfferV1;
 import net.kinguin.expresstrade.trade.sendoffer.v1.dto.SendOfferDto;
+import net.kinguin.expresstrade.trade.sendoffer.v2.SendOfferV2Impl;
+import net.kinguin.expresstrade.trade.sendoffer.v2.dto.SendOfferV2Dto;
 import net.kinguin.expresstrade.trade.sendoffertosteamid.SendOfferToSteamId;
 import net.kinguin.expresstrade.trade.sendoffertosteamid.v1.SendOfferToSteamIdV1;
 import net.kinguin.expresstrade.trade.sendoffertosteamid.v1.dto.SendOfferToSteamIdDto;
@@ -81,6 +84,8 @@ public class ExpressTradeApi {
   private GetOfferV2 getOfferV2;
 
   private SendOffer sendOffer;
+
+  private SendOfferV2 sendOfferV2;
 
   private SendOfferToSteamId sendOfferToSteamId;
 
@@ -120,6 +125,7 @@ public class ExpressTradeApi {
     this.getOffersV2 = new GetOffersV2Impl(expressTradeProperties);
     this.getOfferV2 = new GetOfferV2Impl(expressTradeProperties);
     this.acceptOfferV2 = new AcceptOfferV2Impl(expressTradeProperties);
+    this.sendOfferV2 = new SendOfferV2Impl(expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -226,5 +232,18 @@ public class ExpressTradeApi {
 
   public AcceptOfferV2Dto acceptOfferV2(Integer offerId) throws IOException {
     return acceptOfferV2.execute(offerId);
+  }
+
+  public SendOfferV2Dto sendOfferV2(
+      Integer uid,
+      String token,
+      String tradeUrl,
+      String itemsToSend,
+      String itemsToReceive,
+      Integer expirationTime,
+      String message
+  ) throws IOException {
+    return sendOfferV2
+        .execute(uid, token, tradeUrl, itemsToSend, itemsToReceive, expirationTime, message);
   }
 }
