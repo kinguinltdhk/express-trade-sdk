@@ -1,6 +1,7 @@
 package net.kinguin.expresstrade;
 
 import java.io.IOException;
+import java.util.List;
 import net.kinguin.expresstrade.item.StandardItemSorts;
 import net.kinguin.expresstrade.item.getallitemdefinitions.GetAllItemDefinitions;
 import net.kinguin.expresstrade.item.getallitemdefinitions.v1.GetAllItemDefinitionsV1;
@@ -8,6 +9,9 @@ import net.kinguin.expresstrade.item.getallitemdefinitions.v1.http.dto.GetAllIte
 import net.kinguin.expresstrade.item.getallitems.GetAllItems;
 import net.kinguin.expresstrade.item.getallitems.v1.GetAllItemsV1;
 import net.kinguin.expresstrade.item.getallitems.v1.http.dto.GetAllItemsDto;
+import net.kinguin.expresstrade.item.getitemcounts.GetItemCounts;
+import net.kinguin.expresstrade.item.getitemcounts.v1.GetItemCountsV1Impl;
+import net.kinguin.expresstrade.item.getitemcounts.v1.dto.GetItemCountsV1Dto;
 import net.kinguin.expresstrade.item.getitems.GetItems;
 import net.kinguin.expresstrade.item.getitems.v1.GetItemsV1;
 import net.kinguin.expresstrade.item.getitems.v1.http.dto.GetItemsDto;
@@ -105,6 +109,8 @@ public class ExpressTradeApi {
 
   private GetAllItemDefinitions getAllItemDefinitions;
 
+  private GetItemCounts getItemCounts;
+
   public ExpressTradeApi(ExpressTradeProperties expressTradeProperties) {
     this.getUserInventory = new GetUserInventoryV1(expressTradeProperties);
     this.getUserInventoryFromSteamId = new GetUserInventoryFromSteamIdV1(expressTradeProperties);
@@ -126,6 +132,7 @@ public class ExpressTradeApi {
     this.getOfferV2 = new GetOfferV2Impl(expressTradeProperties);
     this.acceptOfferV2 = new AcceptOfferV2Impl(expressTradeProperties);
     this.sendOfferV2 = new SendOfferV2Impl(expressTradeProperties);
+    this.getItemCounts = new GetItemCountsV1Impl(expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -245,5 +252,9 @@ public class ExpressTradeApi {
   ) throws IOException {
     return sendOfferV2
         .execute(uid, token, tradeUrl, itemsToSend, itemsToReceive, expirationTime, message);
+  }
+
+  public GetItemCountsV1Dto getItemCountsV1(List<Integer> appIds) throws IOException {
+    return getItemCounts.execute(appIds);
   }
 }
