@@ -8,6 +8,7 @@ import net.kinguin.expresstrade.http.dto.ResponseDto;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class GetAllItemDefinitionsDto extends ResponseDto {
+
   private GetAllItemDefinitionsResponseDto response;
 
   @Data

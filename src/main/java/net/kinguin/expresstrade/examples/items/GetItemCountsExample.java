@@ -7,6 +7,7 @@ import net.kinguin.expresstrade.ExpressTradeProperties;
 import net.kinguin.expresstrade.item.getitemcounts.v1.dto.GetItemCountsV1Dto;
 
 public class GetItemCountsExample {
+
   public static void main(String[] args) throws IOException {
     ExpressTradeProperties expressTradeProperties =
         new ExpressTradeProperties(

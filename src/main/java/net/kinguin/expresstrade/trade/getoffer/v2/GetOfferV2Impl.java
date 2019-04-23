@@ -7,7 +7,6 @@ import java.util.Map;
 import net.kinguin.expresstrade.ExpressTradeProperties;
 import net.kinguin.expresstrade.http.Client;
 import net.kinguin.expresstrade.http.RequestUriBuilder;
-import net.kinguin.expresstrade.trade.getoffer.GetOffer;
 import net.kinguin.expresstrade.trade.getoffer.GetOfferV2;
 import net.kinguin.expresstrade.trade.getoffer.v2.dto.GetOfferV2Dto;
 
