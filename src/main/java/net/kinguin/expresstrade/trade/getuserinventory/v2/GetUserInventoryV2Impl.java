@@ -8,7 +8,6 @@ import net.kinguin.expresstrade.ExpressTradeProperties;
 import net.kinguin.expresstrade.http.Client;
 import net.kinguin.expresstrade.http.RequestUriBuilder;
 import net.kinguin.expresstrade.item.StandardItemSorts;
-import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventory;
 import net.kinguin.expresstrade.trade.getuserinventory.GetUserInventoryV2;
 import net.kinguin.expresstrade.trade.getuserinventory.v2.dto.GetUserInventoryV2Dto;
 

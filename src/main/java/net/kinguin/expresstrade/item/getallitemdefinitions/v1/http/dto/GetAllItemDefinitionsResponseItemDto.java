@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class GetAllItemDefinitionsResponseItemDto {
+
   private String def_id;
   private Integer internal_app_id;
   private String name;

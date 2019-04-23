@@ -4,7 +4,6 @@ import java.io.IOException;
 import net.kinguin.expresstrade.ExpressTradeApi;
 import net.kinguin.expresstrade.ExpressTradeProperties;
 import net.kinguin.expresstrade.trade.acceptoffer.v1.dto.AcceptOfferDto;
-import net.kinguin.expresstrade.trade.getoffer.v1.dto.GetOfferDto;
 
 public class AcceptOfferExample {
 

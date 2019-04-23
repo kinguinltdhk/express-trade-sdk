@@ -11,6 +11,7 @@ import net.kinguin.expresstrade.item.getallitemdefinitions.GetAllItemDefinitions
 import net.kinguin.expresstrade.item.getallitemdefinitions.v1.http.dto.GetAllItemDefinitionsDto;
 
 public class GetAllItemDefinitionsV1 extends Client implements GetAllItemDefinitions {
+
   private static final String ENDPOINT_URL = "/IItem/GetItemDefinitions/v1/";
   private final JsonAdapter<GetAllItemDefinitionsDto> jsonAdapter =
       moshi.adapter(GetAllItemDefinitionsDto.class);
