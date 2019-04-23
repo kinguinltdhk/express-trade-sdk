@@ -12,7 +12,7 @@ public class GetProfileDto extends ResponseDto {
   private StandardUserProfileObjectDto response;
 
   @Data
-  private static class StandardUserProfileObjectDto {
+  public static class StandardUserProfileObjectDto {
 
     private StandardUserProfileObject user;
   }
