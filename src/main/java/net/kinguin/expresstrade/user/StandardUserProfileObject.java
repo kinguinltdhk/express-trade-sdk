@@ -16,5 +16,5 @@ public class StandardUserProfileObject {
   private Boolean inventory_is_private;
   private Boolean allow_twofactor_code_reuse;
   private Boolean auto_accept_gift_trades;
-  private Boolean annonymous_transactions;
+  private Boolean anonymous_transactions;
 }

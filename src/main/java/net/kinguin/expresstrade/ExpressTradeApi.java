@@ -66,6 +66,9 @@ import net.kinguin.expresstrade.trade.sendoffer.v2.dto.SendOfferV2Dto;
 import net.kinguin.expresstrade.trade.sendoffertosteamid.SendOfferToSteamId;
 import net.kinguin.expresstrade.trade.sendoffertosteamid.v1.SendOfferToSteamIdV1;
 import net.kinguin.expresstrade.trade.sendoffertosteamid.v1.dto.SendOfferToSteamIdDto;
+import net.kinguin.expresstrade.user.getprofile.GetProfile;
+import net.kinguin.expresstrade.user.getprofile.v1.GetProfileV1;
+import net.kinguin.expresstrade.user.getprofile.v1.http.dto.GetProfileDto;
 
 public class ExpressTradeApi {
 
@@ -111,6 +114,8 @@ public class ExpressTradeApi {
 
   private GetItemCounts getItemCounts;
 
+  private GetProfile getProfile;
+
   public ExpressTradeApi(ExpressTradeProperties expressTradeProperties) {
     this.getUserInventory = new GetUserInventoryV1(expressTradeProperties);
     this.getUserInventoryFromSteamId = new GetUserInventoryFromSteamIdV1(expressTradeProperties);
@@ -133,6 +138,7 @@ public class ExpressTradeApi {
     this.acceptOfferV2 = new AcceptOfferV2Impl(expressTradeProperties);
     this.sendOfferV2 = new SendOfferV2Impl(expressTradeProperties);
     this.getItemCounts = new GetItemCountsV1Impl(expressTradeProperties);
+    this.getProfile = new GetProfileV1(expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -256,5 +262,9 @@ public class ExpressTradeApi {
 
   public GetItemCountsV1Dto getItemCountsV1(List<Integer> appIds) throws IOException {
     return getItemCounts.execute(appIds);
+  }
+
+  public GetProfileDto getProfile(Boolean withExtra) throws IOException {
+    return getProfile.execute(withExtra);
   }
 }
