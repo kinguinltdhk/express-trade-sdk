@@ -264,7 +264,7 @@ public class ExpressTradeApi {
     return getItemCounts.execute(appIds);
   }
 
-  public GetProfileDto getProfile() throws IOException {
-    return getProfile.execute();
+  public GetProfileDto getProfile(Boolean withExtra) throws IOException {
+    return getProfile.execute(withExtra);
   }
 }

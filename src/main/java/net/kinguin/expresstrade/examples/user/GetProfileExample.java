@@ -16,7 +16,7 @@ public class GetProfileExample {
         );
     ExpressTradeApi expressTradeApi = new ExpressTradeApi(expressTradeProperties);
 
-    GetProfileDto getProfileDto = expressTradeApi.getProfile();
+    GetProfileDto getProfileDto = expressTradeApi.getProfile(Boolean.TRUE);
 
     System.out.println(getProfileDto);
   }

@@ -2,8 +2,6 @@ package net.kinguin.expresstrade.user.getprofile.v1;
 
 import com.squareup.moshi.JsonAdapter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import net.kinguin.expresstrade.ExpressTradeProperties;
 import net.kinguin.expresstrade.http.Client;
 import net.kinguin.expresstrade.http.RequestUriBuilder;
@@ -21,12 +19,9 @@ public class GetProfileV1 extends Client implements GetProfile {
   }
 
   @Override
-  public GetProfileDto execute() throws IOException {
-    Map<String, Object> requiredParams = new HashMap<>();
-    requiredParams.put("with_extra", Boolean.TRUE);
-
-    requestUriBuilder = new RequestUriBuilder(requiredParams)
-        .addParam(" twofactor_code", generate2AuthCode());
+  public GetProfileDto execute(Boolean withExtra) throws IOException {
+    requestUriBuilder = new RequestUriBuilder()
+        .addParam("with_extra", withExtra);
 
     return this.jsonAdapter.fromJson(this.makeRequest().string());
   }

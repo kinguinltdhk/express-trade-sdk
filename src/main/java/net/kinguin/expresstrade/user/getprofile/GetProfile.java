@@ -5,5 +5,5 @@ import net.kinguin.expresstrade.user.getprofile.v1.http.dto.GetProfileDto;
 
 public interface GetProfile {
 
-  GetProfileDto execute() throws IOException;
+  GetProfileDto execute(Boolean withExtra) throws IOException;
 }
