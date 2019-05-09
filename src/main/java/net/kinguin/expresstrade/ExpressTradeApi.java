@@ -69,6 +69,9 @@ import net.kinguin.expresstrade.trade.sendoffertosteamid.v1.dto.SendOfferToSteam
 import net.kinguin.expresstrade.user.getprofile.GetProfile;
 import net.kinguin.expresstrade.user.getprofile.v1.GetProfileV1;
 import net.kinguin.expresstrade.user.getprofile.v1.http.dto.GetProfileDto;
+import net.kinguin.expresstrade.user.updateprofile.UpdateProfile;
+import net.kinguin.expresstrade.user.updateprofile.v1.UpdateProfileV1;
+import net.kinguin.expresstrade.user.updateprofile.v1.http.dto.UpdateProfileDto;
 
 public class ExpressTradeApi {
 
@@ -116,6 +119,8 @@ public class ExpressTradeApi {
 
   private GetProfile getProfile;
 
+  private UpdateProfile updateProfile;
+
   public ExpressTradeApi(ExpressTradeProperties expressTradeProperties) {
     this.getUserInventory = new GetUserInventoryV1(expressTradeProperties);
     this.getUserInventoryFromSteamId = new GetUserInventoryFromSteamIdV1(expressTradeProperties);
@@ -139,6 +144,7 @@ public class ExpressTradeApi {
     this.sendOfferV2 = new SendOfferV2Impl(expressTradeProperties);
     this.getItemCounts = new GetItemCountsV1Impl(expressTradeProperties);
     this.getProfile = new GetProfileV1(expressTradeProperties);
+    this.updateProfile = new UpdateProfileV1(expressTradeProperties);
   }
 
   public GetUserInventoryDto getUserInventory(
@@ -266,5 +272,13 @@ public class ExpressTradeApi {
 
   public GetProfileDto getProfile(Boolean withExtra) throws IOException {
     return getProfile.execute(withExtra);
+  }
+
+  public UpdateProfileDto updateProfile(String displayName, Boolean inventoryIsPrivate,
+      Boolean allowTwofactorCodeReuse, Boolean autoAcceptGiftTrades, Boolean anonymousTransactions)
+      throws IOException {
+    return updateProfile
+        .execute(displayName, inventoryIsPrivate, allowTwofactorCodeReuse, autoAcceptGiftTrades,
+            anonymousTransactions);
   }
 }
